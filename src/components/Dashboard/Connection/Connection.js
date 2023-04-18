@@ -22,8 +22,7 @@ export default function Connection() {
     const [view_connection, setShowViewConnection] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    //const [deleteConnection, setToDeleteConnection] = useState(null);
-    const [deleteStatu, setDeleteStatus] = useState(false);
+    const [deleteStatus, setDeleteStatus] = useState(false);
     const [updateRecord, setUpdateRecord] = useState('');
 
     const [error, setErrorMessage] = useState(null);

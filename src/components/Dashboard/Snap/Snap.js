@@ -18,7 +18,7 @@ export default function Snap() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     //const [deleteSnap, setToDeleteSnap] = useState(null);
-    const [deleteStatu, setDeleteStatus] = useState(false);
+    const [deleteStatus, setDeleteStatus] = useState(false);
     const [updateRecord, setUpdateRecord] = useState('');
 
     const [error, setErrorMessage] = useState(null);
@@ -44,7 +44,6 @@ export default function Snap() {
             return res.json();
         }).then((data) => {
             setJobsList(data);
-            console.log(data);
         }, (error) => {
             console.log(error);
         })
@@ -65,7 +64,6 @@ export default function Snap() {
         }).then((data) => {
             setIsLoaded(true);
             setSnapsList(data);
-            console.log(data);
         }, (error) => {
             setIsLoaded(true);
             setErrorMessage(error);
@@ -117,7 +115,6 @@ export default function Snap() {
                 navigate('/');
             }
         };
-
         checkToken();
     }, [navigate]);
 

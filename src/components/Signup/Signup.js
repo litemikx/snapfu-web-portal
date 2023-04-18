@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 var api_host = process.env.REACT_APP_API_URL;
-console.log('api_host: ' + api_host);
 
 var statusCode = '';
 
@@ -88,22 +87,16 @@ export default function Signup({ setToken }) {
 
     useEffect(() => {
         const result = USER_REGEX.test(username);
-        console.log('user: ' + username);
-        console.log('result: ' + result);
         setValidName(result);
     }, [username]);
 
     useEffect(() => {
         const result = EMAIL_REGEX.test(email);
-        console.log('email: ' + email);
-        console.log('result: ' + result);
         setValidEmail(result);
     }, [email]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(password);
-        console.log('result: ' + result);
-        console.log('password: ' + password);
         setValidPwd(result);
         const match = password === matchPassword;
         setValidMatch(match);
@@ -279,8 +272,3 @@ export default function Signup({ setToken }) {
             </span>   
         </div>;
 }
-
-//export default Signup
-/*Signup.propTypes = {
-    setToken: PropTypes.func.isRequired
-}*/
