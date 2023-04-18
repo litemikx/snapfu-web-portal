@@ -9,7 +9,6 @@ var statusCode = '';
 
 export default function StartSnap(id) {
     var token = JSON.parse(sessionStorage.getItem('token'))['token'];
-
         return fetch(api_host + '/api/snaps/start/' + id, {
             method: 'POST',
             headers: {

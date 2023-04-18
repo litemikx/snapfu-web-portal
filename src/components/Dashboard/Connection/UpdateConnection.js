@@ -68,11 +68,9 @@ export default function UpdateRecord({ updateRecord }) {
             console.log('windows: ' + file_path)
             console.log('filepath check windows: ' + result);
         }
-
     }, [file_path, server_os_type])
 
     useEffect(() => {
-
         setName(updateRecord.name);
         setHost(updateRecord.host);
         setPort(updateRecord.port);
@@ -80,7 +78,6 @@ export default function UpdateRecord({ updateRecord }) {
         setAuthType(updateRecord.auth_type);
         setFilePath(updateRecord.file_path)
         setServerOSType(updateRecord.server_os_type);
-
     }, []);
 
     const handleSubmit = async e => {
@@ -96,8 +93,6 @@ export default function UpdateRecord({ updateRecord }) {
             "file_path": file_path,
             "server_os_type": server_os_type
         });
-        //setToken(token);
-        //console.log('res: ' + JSON.stringify(res));
         if (statusCode >= 200 && statusCode <= 202) {
             setSuccess(true);
             e.target.reset();
@@ -108,7 +103,6 @@ export default function UpdateRecord({ updateRecord }) {
     }
 
     if (!success) {
-
         return (
             <div className="updaterecord-form-wrapper">
                 <h1>Update</h1>

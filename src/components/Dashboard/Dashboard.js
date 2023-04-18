@@ -42,9 +42,6 @@ export default function Dashboard() {
       setShowMain(true);
       setResourceType('')
     }
-    console.log('connection: ' + connection);
-    console.log('snap: ' + snap);
-    console.log('main: ' + main);
   }, [resourceType]);
 
   const handleSignOut = () => {

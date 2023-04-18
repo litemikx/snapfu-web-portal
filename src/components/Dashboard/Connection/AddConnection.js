@@ -92,8 +92,6 @@ export default function AddConnection() {
             "file_path": file_path,
             "server_os_type" : server_os_type
         });
-        //setToken(token);
-        //console.log('res: ' + JSON.stringify(res));
         if (statusCode >= 200 && statusCode <= 202) {
             setSuccess(true);
             e.target.reset();
@@ -104,7 +102,6 @@ export default function AddConnection() {
     }
 
     if (!success) {
-
         return (
             <div className="connection-form-wrapper">
                 <h1>Create</h1>

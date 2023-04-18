@@ -8,14 +8,11 @@ import React, { useEffect, useInsertionEffect, useState } from 'react';
 import { useNavigate, Navigate, Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-// import from Dashboard/Connection/dashboard.css
 import '../dashboard.css';
 import { faCheck, faTimes, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 import CreateSnap from '../Snap/CreateSnap';
-
 
 var statusCode = '';
 
@@ -41,7 +38,6 @@ export default function ViewConnection({ view_connection_details }) {
     const [snapCronExpFocus, setSnapCronExpFocus] = useState(false);
     const [snapValidCronExp, setSnapValidCronExp] = useState(false);
 
-
     // use state to store the itemObjectList
     const [itemObjectList, setitemObjectList] = useState({});
 
@@ -52,38 +48,24 @@ export default function ViewConnection({ view_connection_details }) {
     // REGEX to check if string is valid cron expression
     const CRON_REGEX = /^((\*|\d+|\d+-\d+|\d+\/\d+|\d+-\d+\/\d+|\*\/\d+|\d+L|\d+W)(\s+|$)){5,7}$/;
 
-
     const handleOnChange = (position, val, name) => {
         const updatedCheckedState = checkedState.map((item, index) => {
-
             if (index === position) {
-                console.log('pos: ' + position)
                 if (snapList.indexOf(val.toString()) > -1) {
                     var pos = snapList.indexOf(val.toString());
-
-                    console.log('found: ' + val);
                     var newList = [...snapList];
-                    console.log('newList: ' + newList);
                     newList.splice(pos, 1);
-                    console.log('splice list: ' + newList);
                     setSnapList(newList);
                 } else {
                     setSnapList([...snapList, val])
                     setitemObjectList({ ...itemObjectList, [val]: name });
-                    // debug itemObjectList by printing in console
-                    console.log('itemObjectList: ' + JSON.stringify(itemObjectList));
                 }
                 return !item;
             } else {
                 return item;
             }
-
         });
-
         setCheckedState(updatedCheckedState);
-        console.log('checkedState: ' + JSON.stringify(checkedState));
-        console.log('snapList: ' + JSON.stringify(snapList));
-
     }
 
     // create a 2nd confirmAlert for getting input values from the function confirmAddSnap
@@ -100,7 +82,6 @@ export default function ViewConnection({ view_connection_details }) {
                             var res = await CreateSnap({ name: snapName, cron_expression: snapCronExp, channels: itemObjectList, folder_path: snapFolderPath }, view_connection_details)
                             setSnapStatusResponse(res);
                             // print in console snapStatusResponse
-                            console.log('snapStatusResponse: ' + JSON.stringify(snapStatusResponse));
                             onClose();
                         }}>Yes</button>
 
@@ -142,7 +123,6 @@ export default function ViewConnection({ view_connection_details }) {
             setCheckedState(
                 new Array(data.map.entry.length).fill(false)
             );
-            console.log(data);
         }, (error) => {
             setIsLoaded(true);
             setErrorMessage(error);
@@ -155,7 +135,6 @@ export default function ViewConnection({ view_connection_details }) {
                 navigate('/');
             }
         };
-
         checkToken();
     }, [navigate]);
 
@@ -180,39 +159,39 @@ export default function ViewConnection({ view_connection_details }) {
         if (server_os_type == 'linux') {
             var result = LINUX_REGEX.test(snapFolderPath);
             setSnapValidBackupFolder(result);
-            console.log('Linux: ' + snapFolderPath)
-            console.log('filepath check linux: ' + result);
         } else if (server_os_type == 'windows') {
             var result = WINDOWS_REGEX.test(snapFolderPath);
             setSnapValidBackupFolder(result);
-            console.log('windows: ' + snapFolderPath)
-            console.log('filepath check windows: ' + result);
         }
-
     }, [snapFolderPath, server_os_type])
 
     useEffect(() => {
-
         var result = CRON_REGEX.test(snapCronExp);
         setSnapValidCronExp(result);
-        console.log('' + result);
-
     }, [snapCronExp])
-
 
     if (error) {
         return <div>Error: {JSON.stringify(error)}</div>
     } else if (!isLoaded) {
         return <div>Loading...</div>
     } else {
+        var temp
+        // Check if list.map.entry is an array or not
+        if (Array.isArray(list.map.entry)) {
+            temp = list.map.entry;
+        } else {
+            temp = [list.map.entry];
+        }
+
         return (
             <div className="view-connection-container">
                 <div>
                     <h1>Channels</h1>
+                    { console.log(list) }
                     <ul>
                         {
-                            list.map.entry.map((c, index) => {
-                                //console.log('c: ' + c['string'][0].toString());
+                           temp.map((c, index) => {
+                                console.log('c: ' + c['string'][0].toString());
                                 return <li className="item-list" key={index}>
                                     <label className="checkbox-container">
                                         <input
@@ -275,7 +254,7 @@ export default function ViewConnection({ view_connection_details }) {
                                 />
                                 <p id="snapCronExpNote" className={snapCronExpFocus && snapCronExp && !snapValidCronExp ? "instructions" : "offscreen"}>
                                     <FontAwesomeIcon icon={faInfoCircle} /><br />
-                                    <div class="instructions-cron-exp">
+                                    <div className="instructions-cron-exp">
                                     <p>* * * * * *</p>
                                     <p>- - - - - -</p>
                                     <p>| | | | | |</p>
