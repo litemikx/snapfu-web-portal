@@ -30,7 +30,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-To see a demo or how this works, you can check my blog post tutorial here: [How to Use: snapfu]()
+To see a demo or how this works, you can check my blog post tutorial here: [How to Use: snapfu](https://thisdevblogs.wordpress.com/2023/04/18/snapfu-a-mirth-connect-autobackup-system/)
 
 If you like this or want to support my side projects, like this one, you can:
 
