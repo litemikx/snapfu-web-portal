@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import './Login.css';
 import PropTypes from 'prop-types';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
+// import logo512.png from the public folder
+const logo = process.env.PUBLIC_URL+'/logo-v2.png';
 
 var api_host = process.env.REACT_APP_API_URL,
   statusCode = '';
@@ -68,7 +70,8 @@ export default function Login() {
 
   return (
     <div className="login-wrapper">
-      <h1 className="app-header-name">snapfu</h1>
+      
+      <div className="app-header-name"><img src={logo} alt="logo" className="app-logo" />snapfu</div>
       <h2>Log In</h2>
       <form onSubmit={handleSubmit}>
         <label>
